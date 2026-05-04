@@ -97,6 +97,7 @@ p { margin: 0; }
 .loader.hide { opacity: 0; visibility: hidden; pointer-events: none; }
 .loader-inner {
   display: flex;
+  direction: ltr;
   gap: clamp(4px, 1vw, 12px);
   font-family: var(--font-display);
   font-size: clamp(2rem, 8vw, 4.5rem);
@@ -478,6 +479,7 @@ p { margin: 0; }
   letter-spacing: 0.08em;
   line-height: 0.95;
   color: var(--plum-900);
+  direction: ltr;
   background: linear-gradient(135deg, var(--plum-900) 0%, var(--rose-700) 50%, var(--gold-700) 100%);
   -webkit-background-clip: text;
   background-clip: text;
