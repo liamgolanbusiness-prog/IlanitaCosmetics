@@ -109,12 +109,14 @@
       });
     }
 
-    // Hero subtitle/desc/cta/stats fade-in (already handled by IO, but timeline for hero)
-    gsap.from('.hero-eyebrow', { opacity: 0, y: 20, duration: 1, delay: 1.2, ease: 'power2.out' });
-    gsap.from('.title-sub', { opacity: 0, y: 24, duration: 1, delay: 1.9, ease: 'power2.out' });
-    gsap.from('.hero-desc', { opacity: 0, y: 24, duration: 1, delay: 2.1, ease: 'power2.out' });
-    gsap.from('.hero-cta', { opacity: 0, y: 24, duration: 1, delay: 2.3, ease: 'power2.out' });
-    gsap.from('.hero-stats', { opacity: 0, y: 24, duration: 1, delay: 2.5, ease: 'power2.out' });
+    // Hero subtitle/desc/cta/stats fade-in. Use fromTo so GSAP doesn't capture
+    // the CSS [data-reveal] opacity:0 as its destination (which would leave
+    // these elements permanently invisible).
+    gsap.fromTo('.hero-eyebrow', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 1, delay: 1.2, ease: 'power2.out' });
+    gsap.fromTo('.title-sub',    { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 1, delay: 1.9, ease: 'power2.out' });
+    gsap.fromTo('.hero-desc',    { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 1, delay: 2.1, ease: 'power2.out' });
+    gsap.fromTo('.hero-cta',     { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 1, delay: 2.3, ease: 'power2.out' });
+    gsap.fromTo('.hero-stats',   { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 1, delay: 2.5, ease: 'power2.out' });
 
     // Parallax on hero blobs
     gsap.to('.blob-1', { yPercent: 30, ease: 'none', scrollTrigger: { trigger: '.hero', scrub: true } });
@@ -131,47 +133,55 @@
     });
 
     // Service cards stagger reveal
-    gsap.from('.service-card', {
-      opacity: 0,
-      y: 60,
-      duration: 0.9,
-      stagger: 0.08,
-      ease: 'power3.out',
-      scrollTrigger: { trigger: '.services-grid', start: 'top 75%' }
-    });
+    gsap.fromTo('.service-card',
+      { opacity: 0, y: 60 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.9,
+        stagger: 0.08,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: '.services-grid', start: 'top 75%' }
+      });
 
     // Gallery items fade
     gsap.utils.toArray('.gallery-item').forEach((el, i) => {
-      gsap.from(el, {
-        opacity: 0,
-        scale: 0.92,
-        y: 40,
-        duration: 1,
-        delay: i * 0.06,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: el, start: 'top 88%' }
-      });
+      gsap.fromTo(el,
+        { opacity: 0, scale: 0.92, y: 40 },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 1,
+          delay: i * 0.06,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 88%' }
+        });
     });
 
     // Why cards stagger
-    gsap.from('.why-card', {
-      opacity: 0,
-      y: 40,
-      duration: 0.9,
-      stagger: 0.12,
-      ease: 'power3.out',
-      scrollTrigger: { trigger: '.why-grid', start: 'top 78%' }
-    });
+    gsap.fromTo('.why-card',
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.9,
+        stagger: 0.12,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: '.why-grid', start: 'top 78%' }
+      });
 
     // Section title gradient on scroll into view
     gsap.utils.toArray('.section-title').forEach(t => {
-      gsap.from(t, {
-        opacity: 0,
-        y: 30,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: t, start: 'top 85%' }
-      });
+      gsap.fromTo(t,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: t, start: 'top 85%' }
+        });
     });
   }
 
